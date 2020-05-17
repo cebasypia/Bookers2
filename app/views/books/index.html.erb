@@ -1,13 +1,10 @@
 <div class="row">
 	<div class="col-xs-3">
-
 		<h2>User info</h2>
 		<%= render 'users/profile', user: current_user %>
-		<!--メモ　右側の指定に注意。そこを間違えるとエラーが発生して表示されない -->
 
 		<h2>New book</h2>
 		<%= render 'books/newform', book: Book.new %>
-
 	</div>
 
 	<div class="col-xs-9">
@@ -31,15 +28,28 @@
 						<%= attachment_image_tag(book.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
 						<% end %>
 					</td>
+					
 					<td><%= link_to book.title, book, class: "book_#{book.id}" %></td>
+					
 					<td><%= book.body %></td>
+					
+					<td>
+						<% if current_user.already_favorite?(book) %>
+							<% favorite = Favorite.find_by(user_id: current_user, book_id: book.id) %>
+							<%= link_to book_favorite_path(book, favorite), method: :delete do%>
+								<i class="glyphicon glyphicon-heart"></i>
+							<% end %>
+						<% else %>
+							<%= link_to book_favorites_path(book), method: :post do %>
+								<i class="glyphicon glyphicon-heart-empty"></i>
+							<% end %>
+						<% end %>
+						<span><%= book.favorites.count %></span>
+					</td>
 				</tr>
 				<% end %>
 			</tbody>
 		</table>
-
 		<!--books一覧 -->
-
-
 	</div>
 </div>

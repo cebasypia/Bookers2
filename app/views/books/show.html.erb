@@ -1,13 +1,11 @@
 
 <div class="row">
 	<div class="col-xs-3">
-
 		<h2>User info</h2>
 		<%= render 'users/profile', user: current_user %>
 
 		<h2>New book</h2>
 		<%= render 'books/newform', book: @new_book %>
-
 	</div>
 
 	<div class="col-xs-9">
@@ -17,12 +15,29 @@
 				<tr>
 					<td>
 						<%= link_to (@book.user) do %>
-						<%= attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %><br>
+							<%= attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %><br>
 						<%= @book.user.name %>
 						<% end %>
 					</td>
+					
 					<td><%= link_to @book.title, @book %></td>
+					
 					<td><%= @book.body %></td>
+					
+					<td>
+						<% if current_user.already_favorite?(@book) %>
+							<%= link_to book_favorite_path(@book), method: :delete do %>
+								<i class="glyphicon glyphicon-heart"></i>
+							<% end %>
+						<% else %>
+							<%= link_to book_favorites_path(@book), method: :post do %>
+								<i class="glyphicon glyphicon-heart-empty"></i>
+							<% end %>
+						<% end %>
+						
+						<span><%= @book.favorites.count %></span>
+					</td>
+					
 					<% if @book.user_id == current_user.id %>
 						<td><%= link_to "Edit",edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
 						<td><%= link_to "Destroy",@book, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}" %></td>
