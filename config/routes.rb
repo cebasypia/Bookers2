@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'comments/create'
-  get 'comments/destroy'
-  get 'book_comments/create'
-  get 'book_comments/destroy'
   devise_for :users
 
   resources :users, only: [:show, :index, :edit, :update]
