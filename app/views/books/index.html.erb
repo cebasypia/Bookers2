@@ -25,7 +25,7 @@
 				<tr>
 					<td>
 						<%= link_to(book.user) do %>
-						<%= attachment_image_tag(book.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
+							<%= attachment_image_tag(book.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
 						<% end %>
 					</td>
 					
@@ -45,6 +45,10 @@
 							<% end %>
 						<% end %>
 						<span><%= book.favorites.count %></span>
+					</td>
+
+					<td>
+						<p>コメント数 : <%= book.comments.count %></p>
 					</td>
 				</tr>
 				<% end %>
