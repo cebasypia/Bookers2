@@ -2,7 +2,7 @@ class Book < ApplicationRecord
   belongs_to :user
   has_many :favorites
   has_many :favorite_users, through: :favorites, source: :user
-  has_many :comments, dependent: :destroy
+  has_many :book_comments, dependent: :destroy
 
   # バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
   # presence trueは空欄の場合を意味する。
