@@ -36,7 +36,22 @@
 					<td><%= book.body %></td>
 
 					<td>
-						<p>コメント数 : <%= book.comments.count %></p>
+						<% if current_user.already_favorite?(book) %>
+							<%= link_to book_favorite_path(book), method: :delete do %>
+								<i class="glyphicon glyphicon-heart"></i>
+							<% end %>
+						<% else %>
+							<%= link_to book_favorites_path(book), method: :post do %>
+								<i class="glyphicon glyphicon-heart-empty"></i>
+							<% end %>
+						<% end %>
+
+						<span><%= book.favorites.count %></span>
+					</td>
+
+
+					<td>
+						<p>コメント数 : <%= book.book_comments.count %></p>
 					</td>
 				</tr>
 				<% end %>
