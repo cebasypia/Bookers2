@@ -4,7 +4,6 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @new_book = Book.new
     @favorite = Favorite.new
     @book_comments = @book.book_comments
     @book_comment = BookComment.new
@@ -12,19 +11,18 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
-    @new_book = Book.new
     @favorite = Favorite.new
   end
 
   def create
-    @book = Book.new(book_params)
-    @book.user_id = current_user.id
+    @new_book = Book.new(book_params)
+    @new_book.user_id = current_user.id
 
-    if @book.save
-      redirect_to @book, notice: "successfully created book!"
+    if @new_book.save
+      redirect_to @new_book, notice: "successfully created book!"
     else
-      flash.now[:danger] = "error"
       @books = Book.all
+      flash.now[:danger] = "error"
       render 'index'
     end
   end
