@@ -10,15 +10,14 @@
   </head>
 
   <body>
-    <!--ヘッダーの記述-->
-      <%= render 'layouts/navbar' %>
-    <!--ヘッダーの記述-->
+
+    <%= render 'layouts/navbar' %>
+
     <div class="container">
-      <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-      <% end %>
+      <%= render 'layouts/notice' %>
       <%= yield %>
-      <%= debug(params) if Rails.env.development? %>
     </div>
+
+    <%= debug(params) if Rails.env.development? %>
   </body>
 </html>
