@@ -1,3 +1,4 @@
+<% user = current_user if user.nil? %>
 <table class="table">
 		<tr><%= attachment_image_tag(user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg") %></tr>
 

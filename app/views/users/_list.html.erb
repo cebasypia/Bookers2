@@ -3,15 +3,18 @@
     <tr>
       <th>image</th>
       <th>name</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
   <tbody>
     <% users.each do |user| %>
     <tr>
-      <td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
+      <td><%= attachment_image_tag(user, :profile_image, :fill, 80, 80, fallback: "no-image-mini.jpg") %></td>
       <td><%= user.name%></td>
+      <td><p>フォロー数 : <%= link_to user.followings.count, user_followings_path(user) %></p></td>
+      <td><p>フォロワー数 : <%= link_to user.followers.count, user_followers_path(user) %></p></td>
+      <td><%= render 'relationships/follow_button', user: user %></td>
       <td><%= link_to "Show", user, class: "user_#{user.id}" %></td>
     </tr>
     <% end %>
