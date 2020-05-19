@@ -1,0 +1,16 @@
+<% flash.each do |type, obj| %>
+  <div class="alert alert-<%= type %>">
+
+    <% if obj.respond_to? :full_messages %>
+      <h3><%= pluralize(obj.count, "error") %> prohibited this flash from being saved:</h3>
+      <ul>
+        <% obj.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+
+    <% else %>
+      <%= obj %>
+    <% end %>
+  </div>
+<% end %>

@@ -19,10 +19,11 @@ class BooksController < ApplicationController
     @new_book.user_id = current_user.id
 
     if @new_book.save
-      redirect_to @new_book, notice: "successfully created book!"
+      flash[:success] = "successfully created book!"
+      redirect_to @new_book
     else
       @books = Book.all
-      flash.now[:danger] = "error"
+      flash.now[:danger] = @new_book.errors
       render 'index'
     end
   end
@@ -34,9 +35,10 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-      redirect_to @book, notice: "successfully updated book!"
+      flash[:success] = "successfully updated book!"
+      redirect_to @book
     else
-      flash.now[:danger] = "error"
+      flash.now[:danger] = @book.errors
       render "edit"
     end
   end
@@ -44,7 +46,8 @@ class BooksController < ApplicationController
   def destroy
     @book = Book.find(params[:id])
     @book.destroy
-    redirect_to books_path, notice: "successfully delete book!"
+    flash[:success] = "successfully delete book!"
+    redirect_to books_path
   end
 
   private
@@ -56,6 +59,7 @@ class BooksController < ApplicationController
   def ensure_correct_user
     @book = Book.find(params[:id])
     return if @book.user_id == current_user.id
-    redirect_to books_path, notice: '権限がありません'
+    flash[:danger] = '権限がありません'
+    redirect_to books_path
   end
 end
