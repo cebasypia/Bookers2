@@ -8,10 +8,10 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_books, through: :favorites, source: :book
   has_many :book_comments, dependent: :destroy
-  has_many :relationships
-  has_many :followings, through: :relationships, source: :follow
-  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
-  has_many :followers, through: :reverse_of_relationships, source: :user
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followed, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+  has_many :followings, through: :follower, source: :followed
+  has_many :followers, through: :followed, source: :follower
 
   attachment :profile_image, destroy: false
 
@@ -24,13 +24,12 @@ class User < ApplicationRecord
 
   def follow(other_user)
     unless self == other_user
-      relationships.find_or_create_by(follow_id: other_user.id)
+      follower.create(followed_id: other_user.id)
     end
   end
 
   def unfollow(other_user)
-    relationship = relationships.find_by(follow_id: other_user.id)
-    relationship.destroy if relationship
+    follower.find_by(followed_id: other_user.id).destroy
   end
 
   def following?(other_user)
