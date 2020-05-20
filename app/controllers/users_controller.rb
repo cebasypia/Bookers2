@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
-    @users = User.search("name", params[:search])
+    @users = User.search("name", params[:str], params[:type])
   end
 
   def edit

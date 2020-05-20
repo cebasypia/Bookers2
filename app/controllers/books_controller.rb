@@ -10,7 +10,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.search("title",params[:search])
+    @books = Book.search("title", params[:str], params[:type])
     @favorite = Favorite.new
   end
 
