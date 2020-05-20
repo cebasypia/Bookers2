@@ -22,22 +22,10 @@
       <td><%= book.body %></td>
 
       <td>
-        <% if current_user.already_favorite?(book) %>
-          <% favorite = Favorite.find_by(user_id: current_user, book_id: book.id) %>
-          <%= link_to book_favorite_path(book, favorite), method: :delete do%>
-            <i class="glyphicon glyphicon-heart"></i>
-          <% end %>
-        <% else %>
-          <%= link_to book_favorites_path(book), method: :post do %>
-            <i class="glyphicon glyphicon-heart-empty"></i>
-          <% end %>
-        <% end %>
-        <span><%= book.favorites.count %></span>
+				<%= render 'favorites/favorite_button', book: book %>
       </td>
 
-      <td>
-        <p>コメント数 : <%= book.book_comments.count %></p>
-      </td>
+      <td>コメント数 : <%= book.book_comments.count %></td>
     </tr>
     <% end %>
   </tbody>
