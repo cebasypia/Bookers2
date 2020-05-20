@@ -23,22 +23,10 @@
 					<td><%= @book.body %></td>
 
 					<td>
-						<% if current_user.already_favorite?(@book) %>
-							<%= link_to book_favorite_path(@book), method: :delete do %>
-								<i class="glyphicon glyphicon-heart"></i>
-							<% end %>
-						<% else %>
-							<%= link_to book_favorites_path(@book), method: :post do %>
-								<i class="glyphicon glyphicon-heart-empty"></i>
-							<% end %>
-						<% end %>
-
-						<span><%= @book.favorites.count %></span>
+						<%= render 'favorites/favorite_button', book: @book %>
 					</td>
 
-					<td>
-						<p>コメント数 : <%= @book.book_comments.count %></p>
-					</td>
+					<td>コメント数 : <%= @book.book_comments.count %></td>
 
 					<% if @book.user_id == current_user.id %>
 						<td><%= link_to "Edit",edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
@@ -62,25 +50,21 @@
 								<%= book_comment.content %>
 							</td>
 
-							<% if book_comment.user_id == current_user.id %>
-								<td><%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn-sm btn-danger" %></td>
-							<% end %>
+							<td>
+								<% if book_comment.user_id == current_user.id %>
+									<%= link_to "Destroy", book_comment_path(book_comment), method: :delete, class: "btn-sm btn-danger" %>
+								<% end %>
+							</td>
 						</tr>
 					<% end %>
 			</table>
 
-			<%= form_for [@book, @book_comment] do |f| %>
-
-				<div class="row">
-					<%= f.label :content %>
-				</div>
-
-				<div class="row">
+			<div class="row">
+				<%= form_for [@book, @book_comment] do |f| %>
 					<%= f.text_area :content, class: "col-xs-10 book_comment_content" %>
-					<%= f.submit 'コメントする', class: "btn btn-primary col-xs-2" %>
-				</div>
-
-			<% end %>
+					<%= f.submit '送信' %>
+				<% end %>
+			</div>
 	</div>
 </div>
 
