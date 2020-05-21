@@ -23,7 +23,7 @@
 		</table>
 
 		<div class="row">
-			<%= form_for [@book, @book_comment] do |f| %>
+			<%= form_with model: [@book, @book_comment] do |f| %>
 				<%= f.text_area :content, class: "col-xs-10 book_comment_content" %>
 				<%= f.submit '送信' %>
 			<% end %>
