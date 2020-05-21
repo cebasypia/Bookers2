@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise  :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable
 
+  include JpPrefecture
+  jp_prefecture :prefecture_code
+
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_books, through: :favorites, source: :book
