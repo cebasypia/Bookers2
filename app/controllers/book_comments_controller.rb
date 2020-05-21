@@ -4,19 +4,17 @@ class BookCommentsController < ApplicationController
 
   def create
     book_comment = current_user.book_comments.new(book_comment_params)
-    if book_comment.save
-      flash[:success] = 'Comment was successfully created.'
-      redirect_back fallback_location: root_path
-    else
+    unless book_comment.save
       flash[:danger] = book_comment.errors
       redirect_back fallback_location: root_path
     end
+    @book_comments = Book.find(params[:book_id]).book_comments
   end
 
   def destroy
     book_comment = BookComment.find(params[:id])
     book_comment.destroy
-    redirect_back fallback_location: root_path
+    @book_comments = Book.find(book_comment.book_id).book_comments
   end
 
   private
