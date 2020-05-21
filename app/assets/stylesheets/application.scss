@@ -32,3 +32,17 @@ body {
 .actions {
 	margin-top:10px;
 }
+
+#book_list {
+	.edit_book {
+		display: none;
+	}
+	.destroy_book {
+		display: none;
+	}
+}
+#book_list_user {
+	.user_name {
+		display: none;
+	}
+}

@@ -1,0 +1,21 @@
+<td>
+  <%= link_to(book.user) do %>
+    <%= attachment_image_tag(book.user, :profile_image, :fill, 80, 80, fallback: "no-image-mini.jpg") %><br>
+    <span class="user_name"><%= book.user.name %></span>
+  <% end %>
+</td>
+
+<td><%= link_to book.title, book, class: "book_#{book.id}" %></td>
+
+<td><%= book.body %></td>
+
+<td>
+  <%= render 'favorites/favorite_button', book: book %>
+</td>
+
+<td>コメント数 : <%= book.book_comments.count %></td>
+
+<% if book.user_id == current_user.id %>
+  <td class="edit_book"><%= link_to "Edit",edit_book_path(book), class: "btn-sm btn-success edit_book_#{book.id}" %></td>
+  <td class="destroy_book"><%= link_to "Destroy",book, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{book.id}" %></td>
+<% end %>
