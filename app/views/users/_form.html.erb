@@ -1,0 +1,52 @@
+<%= form_for(user) do |f| %>
+
+  <div class="field row">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "col-xs-12 name" %>
+  </div>
+
+  <div class="field row">
+    <%= f.label :image %>
+    <%= f.attachment_field :profile_image, class: "col-xs-12 user_image" %>
+  </div>
+
+  <div class="field row">
+    <%= f.label :introduction %>
+    <%= f.text_area :introduction, class: "col-xs-12 introduction" %>
+  </div>
+
+  <!-- postcode -->
+  <div class="field row">
+    <%= f.label :postcode %>
+    <%= f.text_field :postcode, autofocus: true, autocomplete: "postcode", class: "col-xs-12" %>
+  </div>
+
+  <!-- prefecture code -->
+  <div class="field row">
+    <%= f.label :prefecture_code %><br />
+    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name %>
+  </div>
+
+  <!-- address city -->
+  <div class="field row">
+    <%= f.label :address_city %>
+    <%= f.text_field :address_city, autofocus: true, autocomplete: "address_city", class: "col-xs-12" %>
+  </div>
+
+  <!-- address street -->
+  <div class="field row">
+    <%= f.label :address_street %>
+    <%= f.text_field :address_street, autofocus: true, autocomplete: "address_street", class: "col-xs-12" %>
+  </div>
+
+  <!-- address building -->
+  <div class="field row">
+    <%= f.label :address_building %>
+    <%= f.text_field :address_building, autofocus: true, autocomplete: "address_building", class: "col-xs-12" %>
+  </div>
+
+  <div class="actions row">
+    <%= f.submit class: "btn btn-primary col-xs-12" %>
+  </div>
+
+<% end %>
