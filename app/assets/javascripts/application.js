@@ -15,4 +15,7 @@
 //= require activestorage
 //= require turbolinks
 //= require bootstrap-sprockets
+
+//= require jquery.jpostal
+
 //= require_tree .
