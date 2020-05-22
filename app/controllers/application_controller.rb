@@ -22,5 +22,6 @@ class ApplicationController < ActionController::Base
       :address_street,
       :address_building,
     ])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
   end
 end
