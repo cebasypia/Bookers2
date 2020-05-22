@@ -12,13 +12,13 @@
   <!-- email -->
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, class: "email" %>
+    <%= f.email_field :email, class: "email" %>
   </div>
 
   <!-- postcode -->
   <div class="field">
     <%= f.label :postcode %><br />
-    <%= f.text_field :postcode, autofocus: true, autocomplete: "postcode" %>
+    <%= f.text_field :postcode, autocomplete: "postcode", id: "address_zipcode" %>
   </div>
 
   <!-- prefecture code -->
@@ -30,19 +30,19 @@
   <!-- address city -->
   <div class="field">
     <%= f.label :address_city %><br />
-    <%= f.text_field :address_city, autofocus: true, autocomplete: "address_city" %>
+    <%= f.text_field :address_city, autocomplete: "address_city", id: "address_city" %>
   </div>
 
   <!-- address street -->
   <div class="field">
     <%= f.label :address_street %><br />
-    <%= f.text_field :address_street, autofocus: true, autocomplete: "address_street" %>
+    <%= f.text_field :address_street, autocomplete: "address_street" %>
   </div>
 
   <!-- address building -->
   <div class="field">
     <%= f.label :address_building %><br />
-    <%= f.text_field :address_building, autofocus: true, autocomplete: "address_building" %>
+    <%= f.text_field :address_building, autocomplete: "address_building" %>
   </div>
 
   <!-- password -->
