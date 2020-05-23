@@ -1,11 +1,15 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise  :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable
 
   include JpPrefecture
   jp_prefecture :prefecture_code
+
+  geocoded_by :address
+  after_validation :geocode
 
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -45,5 +49,9 @@ class User < ApplicationRecord
 
   def prefecture_name=(prefecture_name)
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
+  end
+
+  def address
+    "%s %s %s %s" % [prefecture_name, address_city, address_street, address_building]
   end
 end
