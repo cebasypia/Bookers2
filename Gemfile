@@ -78,3 +78,9 @@ gem "refile-mini_magick"
 
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.4.1'
+
+gem 'jp_prefecture'
+
+gem 'geocoder'
+
+gem "dotenv-rails"

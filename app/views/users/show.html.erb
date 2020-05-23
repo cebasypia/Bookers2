@@ -13,3 +13,6 @@
 	</div>
 </div>
 
+<% if @user.id == current_user.id %>
+	<%= render 'users/map', user: @user %>
+<% end %>

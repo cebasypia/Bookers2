@@ -3,18 +3,49 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <!--name表示の追加-->
+  <!-- name -->
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, class: "name" %>
   </div>
-  <!--name表示の追加-->
 
+  <!-- email -->
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, class: "email" %>
+    <%= f.email_field :email, class: "email" %>
   </div>
 
+  <!-- postcode -->
+  <div class="field">
+    <%= f.label :postcode %><br />
+    <%= f.text_field :postcode, autocomplete: "postcode", id: "address_zipcode" %>
+  </div>
+
+  <!-- prefecture code -->
+  <div class="field">
+    <%= f.label :prefecture_code %><br />
+    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name %>
+  </div>
+
+  <!-- address city -->
+  <div class="field">
+    <%= f.label :address_city %><br />
+    <%= f.text_field :address_city, autocomplete: "address_city", id: "address_city" %>
+  </div>
+
+  <!-- address street -->
+  <div class="field">
+    <%= f.label :address_street %><br />
+    <%= f.text_field :address_street, autocomplete: "address_street" %>
+  </div>
+
+  <!-- address building -->
+  <div class="field">
+    <%= f.label :address_building %><br />
+    <%= f.text_field :address_building, autocomplete: "address_building" %>
+  </div>
+
+  <!-- password -->
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
@@ -23,7 +54,7 @@
     <%= f.password_field :password, autocomplete: "new-password", class: "password" %>
   </div>
 
-<!--パスワード確認入力フォーム-->
+  <!-- password confirm -->
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "password_confirm" %>
