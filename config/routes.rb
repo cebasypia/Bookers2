@@ -23,4 +23,8 @@ Rails.application.routes.draw do
   root 'home#top'
   get 'home/about'
   get 'searches/search', as: 'search'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end

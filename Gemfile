@@ -50,6 +50,8 @@ group :development do
   gem 'rubocop-airbnb'
   gem 'debase'
   gem 'ruby-debug-ide'
+  gem 'letter_opener'
+  gem 'letter_opener_web'
 end
 
 group :test do
@@ -84,3 +86,5 @@ gem 'jp_prefecture'
 gem 'geocoder'
 
 gem "dotenv-rails"
+
+gem 'whenever', :require => false
