@@ -23,7 +23,9 @@
 		</tr>
 </table>
 
-<%= render 'relationships/follow_button', user: user %>
+<div class="row">
+	<%= render 'relationships/follow_button', user: user %>
+</div>
 
 <div class="row">
 	<%= link_to '',edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>

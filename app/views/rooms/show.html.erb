@@ -1,0 +1,21 @@
+<h1>チャット</h1>
+
+<% @room.user_rooms.each do |room| %>
+  <% unless room.user.id == current_user.id %>
+    <h4><%= room.user.name %>さん</h4>
+  <% end %>
+<% end %>
+
+<hr>
+<div class="row">
+  <div class="col-xs-8" id="chats">
+    <%= render 'chats/show', chats: @chats %>
+  </div>
+</div>
+
+<%= form_with model: [@room, @chat], remote: true do |f| %>
+  <%= f.text_area :message, :placeholder => "メッセージを入力して下さい" %>
+  <%= f.submit "投稿する" %>
+<% end %>
+
+<%= link_to "ユーザー一覧に戻る", users_path %>
