@@ -3,6 +3,10 @@
 		<h2>User info</h2>
 		<%= render 'users/profile', user: @user %>
 
+	<% unless @user.id == current_user.id %>
+		<%= render 'rooms/enter', room: @room, user: @user %>
+	<% end %>
+
 		<h2>New book</h2>
 		<%= render 'books/form' %>
 	</div>
