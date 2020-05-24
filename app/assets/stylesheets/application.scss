@@ -49,3 +49,12 @@ body {
 #map {
 	height: 50vh;
 }
+
+#chats {
+	.my_chat {
+		text-align: right;
+	}
+	.others_chat {
+		text-align: left;
+	}
+}
