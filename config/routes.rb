@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'chats/show'
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions',
@@ -9,12 +8,17 @@ Rails.application.routes.draw do
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
+    resource :rooms, :only => [:create]
   end
   resources :books, only: [:index, :show, :edit, :create, :update, :destroy] do
     resource :favorites, only: [:create, :destroy]
     resource :book_comments, only: [:create]
   end
   resources :book_comments, only: [:destroy]
+
+  resources :rooms, :only => [:show] do
+    resources :chats, :only => [:create]
+  end
 
   root 'home#top'
   get 'home/about'
